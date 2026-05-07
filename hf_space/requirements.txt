@@ -3,6 +3,7 @@ bitsandbytes==0.45.5
 fastapi
 peft==0.14.0
 pydantic
+protobuf
 sentencepiece
 torch
 transformers==4.46.3
