@@ -213,7 +213,8 @@ function escapeAttr(value) {
 
 function getDefaultEndpoint() {
   const host = window.location.hostname;
-  return host.endsWith("vercel.app") ? "/api/generate" : "";
+  const isLocal = ["", "localhost", "127.0.0.1"].includes(host);
+  return isLocal ? "" : "/api/generate";
 }
 
 init();
