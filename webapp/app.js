@@ -49,7 +49,7 @@ const toolConfig = {
 
 const state = {
   tool: "grammar",
-  endpoint: localStorage.getItem("latinTutorEndpoint") || "",
+  endpoint: localStorage.getItem("latinTutorEndpoint") || getDefaultEndpoint(),
 };
 
 const els = {
@@ -209,6 +209,11 @@ function escapeHtml(value) {
 
 function escapeAttr(value) {
   return escapeHtml(value);
+}
+
+function getDefaultEndpoint() {
+  const host = window.location.hostname;
+  return host.endsWith("vercel.app") ? "/api/generate" : "";
 }
 
 init();
