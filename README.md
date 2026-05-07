@@ -14,6 +14,8 @@ https://huggingface.co/fpetrel95/latin-academic-lora-v1
 - `run_latin_eval_colab.py`: fixed evaluation runner.
 - `latin_eval_prompts.jsonl`: 25-prompt evaluation suite.
 - `agent_latin_tutor.py`: first CLI tutor-agent prototype.
+- `webapp/`: installable PWA frontend for the tutor.
+- `server/`: FastAPI backend for LoRA inference.
 - `README_HF_latin_academic_lora_v1.md`: Hugging Face model card source.
 - `requirements.txt`: Python dependencies.
 
@@ -83,6 +85,41 @@ Example:
 
 ```text
 > Analiza morfológicamente: regibus
+```
+
+## Web App
+
+Run the static PWA:
+
+```bash
+python -m http.server 5173 -d webapp
+```
+
+Open:
+
+```text
+http://localhost:5173
+```
+
+The app can be installed as a PWA and later wrapped with Capacitor for Android. It expects a backend endpoint compatible with:
+
+```http
+POST /generate
+{"prompt": "..."}
+```
+
+## Backend API
+
+Run the reference FastAPI backend:
+
+```bash
+uvicorn server.latin_tutor_api:app --host 0.0.0.0 --port 8000
+```
+
+Then set the web app endpoint to:
+
+```text
+http://localhost:8000/generate
 ```
 
 ## Prompt Format
