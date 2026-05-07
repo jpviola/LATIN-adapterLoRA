@@ -1,0 +1,9 @@
+accelerate
+bitsandbytes
+fastapi
+peft
+pydantic
+sentencepiece
+torch
+transformers
+uvicorn[standard]
