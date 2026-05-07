@@ -60,7 +60,7 @@ def load_model():
         bnb_4bit_compute_dtype=compute_dtype,
         bnb_4bit_use_double_quant=True,
     )
-    tokenizer = AutoTokenizer.from_pretrained(LORA_ID, token=HF_TOKEN)
+    tokenizer = AutoTokenizer.from_pretrained(BASE_MODEL, token=HF_TOKEN, use_fast=False)
     model = AutoModelForCausalLM.from_pretrained(
         BASE_MODEL,
         quantization_config=bnb_config,
