@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1f5f5b" />
+    <title>Agente Tutor Latinista</title>
+    <link rel="manifest" href="./manifest.webmanifest" />
+    <link rel="stylesheet" href="./styles.css" />
+    <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.min.js" defer></script>
+    <script src="./app.js" defer></script>
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Módulos">
+        <div class="brand">
+          <div class="brand-mark">L</div>
+          <div>
+            <h1>Latinista</h1>
+            <p>Tutor académico</p>
+          </div>
+        </div>
+
+        <nav class="tool-list" id="toolList">
+          <button class="tool active" data-tool="grammar">
+            <i data-lucide="book-open"></i>
+            <span>Gramática</span>
+          </button>
+          <button class="tool" data-tool="declensions">
+            <i data-lucide="table-2"></i>
+            <span>Declinaciones</span>
+          </button>
+          <button class="tool" data-tool="verbs">
+            <i data-lucide="list-tree"></i>
+            <span>Verbos</span>
+          </button>
+          <button class="tool" data-tool="dictionary">
+            <i data-lucide="search"></i>
+            <span>Diccionario</span>
+          </button>
+          <button class="tool" data-tool="corrector">
+            <i data-lucide="check-check"></i>
+            <span>Corrector</span>
+          </button>
+          <button class="tool" data-tool="practice">
+            <i data-lucide="graduation-cap"></i>
+            <span>Práctica</span>
+          </button>
+        </nav>
+
+        <div class="sidebar-actions">
+          <button class="icon-button" id="settingsButton" title="Configuración" aria-label="Configuración">
+            <i data-lucide="settings"></i>
+          </button>
+          <button class="icon-button" id="clearButton" title="Limpiar conversación" aria-label="Limpiar conversación">
+            <i data-lucide="trash-2"></i>
+          </button>
+        </div>
+      </aside>
+
+      <main class="main">
+        <section class="workspace">
+          <header class="workspace-header">
+            <div>
+              <p class="eyebrow" id="modeLabel">Gramática</p>
+              <h2 id="modeTitle">Explica una construcción latina</h2>
+            </div>
+            <div class="status-pill" id="statusPill">Sin endpoint</div>
+          </header>
+
+          <section class="prompt-panel">
+            <label for="userInput" id="inputLabel">Consulta</label>
+            <textarea id="userInput" rows="4" spellcheck="false"></textarea>
+            <div class="prompt-actions">
+              <div class="quick-prompts" id="quickPrompts"></div>
+              <button class="primary-button" id="sendButton">
+                <i data-lucide="send"></i>
+                <span>Enviar</span>
+              </button>
+            </div>
+          </section>
+
+          <section class="chat" id="chat" aria-live="polite"></section>
+        </section>
+      </main>
+    </div>
+
+    <dialog class="settings-dialog" id="settingsDialog">
+      <form method="dialog" class="settings-card">
+        <header>
+          <h3>Configuración</h3>
+          <button class="icon-button" value="cancel" aria-label="Cerrar">
+            <i data-lucide="x"></i>
+          </button>
+        </header>
+        <label for="endpointInput">Endpoint del agente</label>
+        <input id="endpointInput" type="url" placeholder="http://localhost:8000/generate" />
+        <p>
+          La app espera un endpoint JSON con <code>{"prompt": "..."}</code> y respuesta
+          <code>{"answer": "..."}</code>.
+        </p>
+        <menu>
+          <button class="secondary-button" value="cancel">Cancelar</button>
+          <button class="primary-button" id="saveSettingsButton" value="default">Guardar</button>
+        </menu>
+      </form>
+    </dialog>
+  </body>
+</html>
