@@ -35,6 +35,25 @@ Response:
 
 Use `server/latin_tutor_api.py` as the reference backend.
 
+## Deploy on Vercel
+
+Vercel is recommended for the web/PWA layer, not for running the 7B LoRA directly.
+Deploy the model on a GPU backend, then let Vercel proxy requests to it.
+
+1. Import the GitHub repository in Vercel.
+2. Set the project root directory to `webapp`.
+3. Use framework preset `Other`.
+4. Add environment variables:
+
+```text
+LATIN_BACKEND_URL=https://your-gpu-backend.example.com/generate
+LATIN_BACKEND_TOKEN=optional-shared-secret
+```
+
+On Vercel, the frontend uses `/api/generate` automatically. That serverless function forwards the browser request to `LATIN_BACKEND_URL`, keeping the real GPU endpoint configurable.
+
+For local static testing with `python -m http.server`, configure the backend URL manually in the app settings, for example `http://localhost:8000/generate`.
+
 ## Android Path
 
 Recommended options:
