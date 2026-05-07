@@ -1,9 +1,9 @@
-accelerate
-bitsandbytes
+accelerate==1.1.1
+bitsandbytes==0.45.5
 fastapi
-peft
+peft==0.14.0
 pydantic
 sentencepiece
 torch
-transformers
+transformers==4.46.3
 uvicorn[standard]
