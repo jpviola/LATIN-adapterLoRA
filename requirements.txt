@@ -1,8 +1,10 @@
 accelerate
 bitsandbytes
 datasets
+fastapi
 huggingface_hub
 peft
 torch
 transformers
 trl
+uvicorn
