@@ -165,11 +165,22 @@ async function callEndpoint(instruction) {
     headers: { "Content-Type": "application/json" },
     body: JSON.stringify({ prompt: instruction }),
   });
+  const raw = await response.text();
   if (!response.ok) {
-    throw new Error(`HTTP ${response.status}`);
+    throw new Error(formatEndpointError(response.status, raw));
   }
-  const data = await response.json();
+  const data = JSON.parse(raw);
   return data.answer || data.text || "Respuesta vacía.";
+}
+
+function formatEndpointError(status, raw) {
+  if (!raw) return `HTTP ${status}`;
+  try {
+    const data = JSON.parse(raw);
+    return `HTTP ${status}: ${data.detail || data.error || raw}`;
+  } catch {
+    return `HTTP ${status}: ${raw}`;
+  }
 }
 
 function demoAnswer(instruction) {
